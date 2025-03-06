@@ -1,4 +1,5 @@
 package edu.grinnell.csc207.blockchain;
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class Hash {
         return data;
     }
     public boolean isValid() {
-        return data[0] == 0 && data[1] == 0 && data[2] == 0;
+        return Byte.toUnsignedInt(data[0]) == 0 && Byte.toUnsignedInt(data[1]) == 0 && Byte.toUnsignedInt(data[2]) == 0;
     }
     public String toString() {
         String hashString = "";
@@ -31,9 +32,12 @@ public class Hash {
         }
         return false;
     }
-    public static byte[] calculateHash(String msg) throws NoSuchAlgorithmException {
+    public static byte[] calculateHash(int amount, int num, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("sha-256");
-        md.update(msg.getBytes());
+        md.update(ByteBuffer.allocate(4).putInt(num));
+        md.update(ByteBuffer.allocate(4).putInt(amount));
+        md.update(prevHash.data);
+        md.update(ByteBuffer.allocate(4).putLong(nonce));
         byte[] hash = md.digest();
         return hash;
     }
