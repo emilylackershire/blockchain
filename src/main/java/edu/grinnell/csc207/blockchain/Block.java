@@ -19,7 +19,6 @@ public class Block {
         this.amount = amount;
         this.prevHash = prevHash;
         this.nonce = nonce;
-
     }
     public int getNum() {
         return number;
