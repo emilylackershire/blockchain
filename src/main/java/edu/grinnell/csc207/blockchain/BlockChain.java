@@ -1,8 +1,6 @@
 package edu.grinnell.csc207.blockchain;
 
-import java.util.List;
-
-import javax.swing.LayoutStyle;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * A linked list of hash-consistent blocks representing a ledger of
@@ -30,12 +28,12 @@ public class BlockChain {
         first = n;
         last = n;
     }
-    public Block mine(int amount) { 
+    public Block mine(int amount) throws NoSuchAlgorithmException { 
         long nonce = 0;
-        Hash hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.getLast, nonce));
+        Hash hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.block.getPrevHash(), nonce));
         while(!hash.isValid()) {
             nonce++; 
-            hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.getLast, nonce));
+            hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.block.getPrevHash(), nonce));
         }
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
         return newBlock;
@@ -79,8 +77,17 @@ public class BlockChain {
             return true;
     }
     public void printBalances() {
-
+        Node cur = first;
+        while (cur.next != null) {
+            if(cur.block.getAmount() > 0){
+                annaBalance += cur.block.getAmount();
+            } else {
+                bobBalance += cur.block.getAmount();
+            }
+            cur = cur.next;
+        }
     }
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
         Node cur = first;
@@ -88,7 +95,7 @@ public class BlockChain {
             string.append(cur.block.toString());
             cur = cur.next;
         }
-     return string;   
+     return string.toString();   
     }
 
 }
