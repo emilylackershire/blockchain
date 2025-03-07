@@ -35,6 +35,7 @@ public class Block {
     public Hash getHash() {
         return hash;
     }
+    @Override
     public String toString() {
         return "Block " + getNum() + " (Amount: " + getAmount() + ", Nonce: " + getNonce() + ", prevHash: " + getHash() + ", hash: " + getHash() +")";
     }

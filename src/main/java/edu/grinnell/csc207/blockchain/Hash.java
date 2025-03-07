@@ -8,7 +8,7 @@ import java.util.Arrays;
  * A wrapper class over a hash value (a byte array).
  */
 public class Hash {
-    private byte[] data;
+    private final byte[] data;
     public Hash(byte[] data){
         this.data = data;
     }
@@ -18,6 +18,7 @@ public class Hash {
     public boolean isValid() {
         return Byte.toUnsignedInt(data[0]) == 0 && Byte.toUnsignedInt(data[1]) == 0 && Byte.toUnsignedInt(data[2]) == 0;
     }
+    @Override
     public String toString() {
         String hashString = "";
         for(int i = 0; i < data.length; i++) {
@@ -25,6 +26,7 @@ public class Hash {
         }
         return hashString;
     }
+    @Override
     public boolean equals(Object other) {
         if (other instanceof Hash o) {
             Arrays.equals(o.getData(), data);

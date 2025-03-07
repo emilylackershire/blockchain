@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 public class BlockChain {
     Node first;
     Node last; 
-    int size;
     int annaBalance = 0;
     int bobBalance = 0;
     
