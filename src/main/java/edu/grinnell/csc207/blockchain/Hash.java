@@ -38,7 +38,9 @@ public class Hash {
         MessageDigest md = MessageDigest.getInstance("sha-256");
         md.update(ByteBuffer.allocate(4).putInt(num));
         md.update(ByteBuffer.allocate(4).putInt(amount));
-        md.update(prevHash.data);
+        if(prevHash != null) {
+            md.update(prevHash.data);
+        }
         md.update(ByteBuffer.allocate(4).putLong(nonce));
         byte[] hash = md.digest();
         return hash;

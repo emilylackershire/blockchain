@@ -12,7 +12,6 @@ public class BlockChain {
     Node last; 
     int annaBalance = 0;
     int bobBalance = 0;
-    
     public class Node {
         Block block;
         Node next;
@@ -62,6 +61,9 @@ public class BlockChain {
     }
     public Hash getHash() {
         return last.block.getHash();
+    }
+    public long getNonce() {
+        return last.block.getNonce();
     }
     public boolean isValidBlockChain() {
         Node prev = first;
