@@ -42,17 +42,18 @@ public class BlockChainDriver {
                 case "mine":
                     System.out.println("Amount Transfered? ");
                     int amount = Integer.valueOf(scan.nextLine());
-                    //block.mine(amount);
-                    //long nonce = block.getNonce();
-                    System.out.println("amount: " + amount + " nonce: ");
+                    block.mine(amount);
+                    long nonce = block.getNonce();
+                    System.out.println("amount: " + amount + " nonce: " + nonce);
                   break;
                 case "append":
                     System.out.println("Amount Transfered? ");
                     int amountAppend = Integer.valueOf(scan.nextLine());
-                    //block.mine(amount);
+                    block.mine(amountAppend);
                     long nonceAppend = block.getNonce();
                     Block newBlock = new Block(block.getSize() + 1, amountAppend, block.getHash(), nonceAppend);
-                    System.out.println("amount: " + amountAppend + " nonce: ");
+                    block.last.next.block = newBlock;
+                    System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
                 case "remove":
                     block.removeLast();
@@ -65,7 +66,7 @@ public class BlockChainDriver {
                     }
                     break;
                case "report":
-                    block.printBalances();
+                    System.out.println("\nBob's Balance: " + block.getBobBalance() + ", Anna's Balace: " + block.getAnnaBalance() + "\n");
                     break;
                 case "help":
                     printer();
@@ -76,7 +77,7 @@ public class BlockChainDriver {
                default:
                     printer();
              }
-            printer();
+            System.out.println("Command? ");
             input = scan.nextLine();
         }
 

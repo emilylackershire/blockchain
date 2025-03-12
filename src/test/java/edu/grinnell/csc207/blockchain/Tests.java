@@ -4,10 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class Tests {
-    // TODO: fill me in with tests that you write for this project!
+    int initialAmount = 300;
     
     @Test
-    public void placeholderTest() {
-        assertEquals(2, 1 + 1);
+    public void annaStartTest() {
+        BlockChain block = new BlockChain(initialAmount);
+        assertEquals(300, block.annaBalance);
+    }
+    @Test
+    public void bobStartTest() {
+        BlockChain block = new BlockChain(initialAmount);
+        assertEquals(0, block.bobBalance);
+    }
+    @Test
+    public void annaStratTest() {
+        BlockChain block = new BlockChain(initialAmount);
+        assertEquals(300, block.annaBalance);
     }
 }

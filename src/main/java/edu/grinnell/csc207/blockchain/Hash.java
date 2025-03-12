@@ -18,6 +18,9 @@ public class Hash {
     public boolean isValid() {
         return Byte.toUnsignedInt(data[0]) == 0 && Byte.toUnsignedInt(data[1]) == 0 && Byte.toUnsignedInt(data[2]) == 0;
     }
+    public boolean isNotValid() {
+        return Byte.toUnsignedInt(data[0]) != 0 || Byte.toUnsignedInt(data[1]) != 0 || Byte.toUnsignedInt(data[2]) != 0;
+    }
     @Override
     public String toString() {
         String hashString = "";
@@ -36,12 +39,11 @@ public class Hash {
     }
     public static byte[] calculateHash(int amount, int num, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("sha-256");
-        md.update(ByteBuffer.allocate(4).putInt(num));
-        md.update(ByteBuffer.allocate(4).putInt(amount));
+        md.update(ByteBuffer.allocate(4).putInt(amount).array());
         if(prevHash != null) {
             md.update(prevHash.data);
         }
-        md.update(ByteBuffer.allocate(4).putLong(nonce));
+        md.update(ByteBuffer.allocate(8).putLong(nonce).array());
         byte[] hash = md.digest();
         return hash;
     }

@@ -10,8 +10,8 @@ import java.security.NoSuchAlgorithmException;
 public class BlockChain {
     Node first;
     Node last; 
-    int annaBalance = 0;
-    int bobBalance = 0;
+    public int annaBalance = 0;
+    public int bobBalance = 0;
     public class Node {
         Block block;
         Node next;
@@ -25,14 +25,21 @@ public class BlockChain {
         Node n = new Node(block, null);
         first = n;
         last = n;
+        annaBalance = initial;
     }
     public Block mine(int amount) throws NoSuchAlgorithmException { 
         long nonce = 0;
         Hash hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.block.getPrevHash(), nonce));
-        while(!hash.isValid()) {
+        int maxIterations = 10000;
+        int iterations = 0;
+        while(hash.isNotValid() && iterations > maxIterations) {
             nonce++; 
             hash = new Hash(Hash.calculateHash(this.getSize() + 1, amount, last.block.getPrevHash(), nonce));
+            iterations++;
         }
+        //System.out.println("nonce " + nonce);
+        //System.out.println("iterations " + iterations);
+        //System.out.println("hash " + hash);
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
         return newBlock;
     }
@@ -76,6 +83,12 @@ public class BlockChain {
                 cur = cur.next;
             }
             return true;
+    }
+    public int getBobBalance() {
+        return bobBalance;
+    }
+    public int getAnnaBalance() {
+        return annaBalance;
     }
     public void printBalances() {
         Node cur = first;
