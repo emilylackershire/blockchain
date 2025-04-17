@@ -18,13 +18,15 @@ public class BlockChainDriver {
         System.out.println(" quit: quits the program");
         System.out.println("Command?");
     }
+
     /**
      * The main entry point for the program.
+     * 
      * @param args the command-line arguments
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        if (args.length != 1 ) {
+        if (args.length != 1) {
             System.err.println("Usage: java BlockChain: missing an initial amount");
             System.exit(1);
         }
@@ -37,21 +39,22 @@ public class BlockChainDriver {
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
         boolean quit = false;
-        while(quit == false) {
-            switch(input) {
+        while (quit == false) {
+            switch (input) {
                 case "mine":
                     System.out.println("Amount Transfered? ");
                     int amount = Integer.valueOf(scan.nextLine());
                     block.mine(amount);
                     long nonce = block.getNonce();
                     System.out.println("amount: " + amount + " nonce: " + nonce);
-                  break;
+                    break;
                 case "append":
                     System.out.println("Amount Transfered? ");
                     int amountAppend = Integer.valueOf(scan.nextLine());
                     block.mine(amountAppend);
                     long nonceAppend = block.getNonce();
-                    Block newBlock = new Block(block.getSize() + 1, amountAppend, block.getHash(), nonceAppend);
+                    Block newBlock = new Block(block.getSize()
+                            + 1, amountAppend, block.getHash(), nonceAppend);
                     block.last.next.block = newBlock;
                     System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
@@ -59,37 +62,30 @@ public class BlockChainDriver {
                     block.removeLast();
                     break;
                 case "check":
-                    if(block.isValidBlockChain() == true) {
+                    if (block.isValidBlockChain() == true) {
                         System.out.println("The block chain is vaid!");
                     } else {
                         System.out.println("The block chain is not valid!");
                     }
                     break;
-               case "report":
-                    System.out.println("\nBob's Balance: " + block.getBobBalance() + ", Anna's Balace: " + block.getAnnaBalance() + "\n");
+                case "report":
+                    System.out.println("\nBob's Balance: " + block.getBobBalance()
+                            + ", Anna's Balace: "
+                            + block.getAnnaBalance() + "\n");
                     break;
                 case "help":
                     printer();
                     break;
-               case "quit":
+                case "quit":
                     quit = true;
                     break;
-               default:
+                default:
                     printer();
-             }
+            }
             System.out.println("Command? ");
             input = scan.nextLine();
         }
 
-
-
-
-
-
-
-
-
-
         scan.close();
-    }  
+    }
 }
