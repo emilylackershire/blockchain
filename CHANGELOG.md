@@ -8,3 +8,10 @@ Make sure you add javadoc comments to your program and be careful with indentati
 To start off, I fixed the style errors! (I couldn't get checkstyle to run previously, but figured it out!)
 
 I then changed my append method so it was working better. 
+
+if (blk.getHash().isValid() && blk.getHash() != blk.getPrevHash()) {
+            Node newNode = new Node(blk, null);
+            last.next = newNode;
+        } else {
+            throw new IllegalArgumentException();
+        }

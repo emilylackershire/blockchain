@@ -64,9 +64,9 @@ public class BlockChain {
                     + 1, amount, last.block.getPrevHash(), nonce));
             iterations++;
         }
-        // System.out.println("nonce " + nonce);
-        // System.out.println("iterations " + iterations);
-        // System.out.println("hash " + hash);
+        System.out.println("nonce " + nonce);
+        System.out.println("iterations " + iterations);
+        System.out.println("hash " + hash);
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
         return newBlock;
     }
