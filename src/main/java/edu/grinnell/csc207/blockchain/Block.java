@@ -1,200 +1,86 @@
 package edu.grinnell.csc207.blockchain;
 
-import java.security.NoSuchAlgorithmException;
-
 /**
- * A linked list of hash-consistent blocks representing a ledger of
- * monetary transactions.
+ * A single block of a blockchain.
  */
-
-public class BlockChain {
-    Node first;
-    Node last;
-    public int annaBalance = 0;
-    public int bobBalance = 0;
+public class Block {
+    int number = 0;
+    int amount;
+    Hash prevHash;
+    long nonce;
+    Hash hash;
 
     /**
-     * class contains block and next
+     * initializes everything
+     * @param num - number 
+     * @param amount - amount we are adding/taking
+     * @param prevHash - previous hash
      */
-    public class Node {
-        Block block;
-        Node next;
-
-        /**
-         * initializes node
-         * 
-         * @param block
-         * @param next
-         */
-        public Node(Block block, Node next) {
-            this.block = block;
-            this.next = next;
-        }
+    public Block(int num, int amount, Hash prevHash) {
+        this.number = num;
+        this.amount = amount;
+        this.prevHash = prevHash;
     }
 
     /**
-     * creates the block chain
-     * 
-     * @param initial initial balance we want to add
+     * initializes everything
+     * @param num - number 
+     * @param amount - amount we are adding/taking
+     * @param prevHash - previous hash
+     * @param nonce - nonce
      */
-    public BlockChain(int initial) {
-        Block block = new Block(1, initial, null);
-        Node n = new Node(block, null);
-        first = n;
-        last = n;
-        annaBalance = initial;
+    public Block(int num, int amount, Hash prevHash, long nonce) {
+        this.number = num;
+        this.amount = amount;
+        this.prevHash = prevHash;
+        this.nonce = nonce;
     }
 
     /**
-     * mines the amount
-     * 
-     * @param amount
-     * @return mined number
-     * @throws NoSuchAlgorithmException
+     * @return returns number
      */
-    public Block mine(int amount) throws NoSuchAlgorithmException {
-        long nonce = 0;
-        Hash hash = new Hash(Hash.calculateHash(this.getSize()
-                + 1, amount, last.block.getPrevHash(), nonce));
-        int maxIterations = 10000;
-        int iterations = 0;
-        while (hash.isNotValid() && iterations > maxIterations) {
-            nonce++;
-            hash = new Hash(Hash.calculateHash(this.getSize()
-                    + 1, amount, last.block.getPrevHash(), nonce));
-            iterations++;
-        }
-        // System.out.println("nonce " + nonce);
-        // System.out.println("iterations " + iterations);
-        // System.out.println("hash " + hash);
-        Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
-        return newBlock;
+    public int getNum() {
+        return number;
     }
 
     /**
-     * gets the size
-     * 
-     * @return returns size
+     * @return retruns the amount 
      */
-    public int getSize() {
-        return last.block.getNum();
+    public int getAmount() {
+        return amount;
     }
 
-    /**
-     * appends a new block to the block chain
-     * 
-     * @param blk block we are adding
-     */
-    public void append(Block blk) {
-        if (blk.getHash().isValid() && blk.getHash() != blk.getPrevHash()) {
-            Node newNode = new Node(blk, null);
-            last.next = newNode;
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * removes the last element of the blockchain
-     * 
-     * @return returns a boolean if it can remove
-     */
-    public boolean removeLast() {
-        if (last.block.getNum() == 1) {
-            return false;
-        } else {
-            Node cur = first;
-            while (cur.next != null) {
-                cur = cur.next;
-            }
-            last = cur;
-            return true;
-        }
-    }
-
-    /**
-     * gets and returns the hash
-     * 
-     * @return returns hash
-     */
-    public Hash getHash() {
-        return last.block.getHash();
-    }
-
-    /**
-     * gets and returns the nonce
-     * 
+    /** 
+     * returns the nonce
      * @return returns nonce
      */
     public long getNonce() {
-        return last.block.getNonce();
+        return nonce;
     }
 
     /**
-     * checks if the block chain is valid
-     * 
-     * @return returns a boolean representation
+     * @return returns the previous hash
      */
-    public boolean isValidBlockChain() {
-        Node prev = first;
-        Node cur = first;
-        while (cur.next != null) {
-            if (!cur.block.getHash().isValid() || prev.block.getHash() != cur.block.getPrevHash()) {
-                return false;
-            }
-            prev = cur;
-            cur = cur.next;
-        }
-        return true;
+    public Hash getPrevHash() {
+        return prevHash;
     }
 
     /**
-     * bobs balance
-     * 
-     * @return returns bobs balance
+     * returns the hash
+     * @return returns hash
      */
-    public int getBobBalance() {
-        return bobBalance;
+    public Hash getHash() {
+        return hash;
     }
 
     /**
-     * annas balance
-     * 
-     * @return returns annas balance
-     */
-    public int getAnnaBalance() {
-        return annaBalance;
-    }
-
-    /**
-     * prints bobs and annas balances
-     */
-    public void printBalances() {
-        Node cur = first;
-        while (cur.next != null) {
-            if (cur.block.getAmount() > 0) {
-                annaBalance += cur.block.getAmount();
-            } else {
-                bobBalance += cur.block.getAmount();
-            }
-            cur = cur.next;
-        }
-    }
-
-    /**
-     * string representation of the block
-     * 
-     * @returns
+     * a string representation of everything
+     * @return returns string
      */
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder();
-        Node cur = first;
-        while (cur.next != null) {
-            string.append(cur.block.toString());
-            cur = cur.next;
-        }
-        return string.toString();
+        return "Block " + getNum() + " (Amount: " + getAmount() 
+                + ", Nonce: " + getNonce() + ", prevHash: " + getHash()
+                + ", hash: " + getHash() + ")";
     }
-
 }
