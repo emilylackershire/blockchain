@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class BlockChain {
     Node first;
     Node last;
+    long nonce = 0;
     public int annaBalance = 0;
     public int bobBalance = 0;
 
@@ -54,17 +55,13 @@ public class BlockChain {
      * @throws NoSuchAlgorithmException
      */
     public Block mine(int amount) throws NoSuchAlgorithmException {
-        long nonce = 0;
+        nonce = 0;
         Hash hash = new Hash(Hash.calculateHash(this.getSize()
                 + 1, amount, last.block.getPrevHash(), nonce));
-        int maxIterations = 1000000000;
-        int iterations = 0;
-        // before there was a line comparing maxIterations to iterations, to ensure the program would not run forever
         while (hash.isNotValid()) {
             nonce++;
             hash = new Hash(Hash.calculateHash(this.getSize()
                     + 1, amount, last.block.getPrevHash(), nonce));
-            iterations++;
         }
         System.out.println("amount: " + amount + " nonce " + nonce);
         //System.out.println("hash " + hash);
@@ -87,14 +84,23 @@ public class BlockChain {
      * 
      * @param blk block we are adding
      */
-    public void append(Block blk) {
-        Hash hash = blk.getHash();
+    public void append(Block blk, int amount) throws NoSuchAlgorithmException {
+        nonce = 0;
+        Hash hash = new Hash(Hash.calculateHash(this.getSize()
+                + 1, amount, last.block.getPrevHash(), nonce));
+        while (hash.isNotValid()) {
+            nonce++;
+            hash = new Hash(Hash.calculateHash(this.getSize()
+                    + 1, amount, last.block.getPrevHash(), nonce));
+        }
+        Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
+        newBlock.nonce = nonce; 
         Hash prevHash = blk.getPrevHash();
         if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
             last.next = newNode;
         } else {
-            System.out.println("blk.getHash() " + hash + " blk.getPrevHash() " + prevHash);
+            System.out.println("nonce: " + blk.getNonce() + " blk.getHash() " + hash + " blk.getPrevHash() " + prevHash);
             //throw new IllegalArgumentException();
         }
     }
@@ -191,12 +197,11 @@ public class BlockChain {
      * 
      * @returns
      */
-    @Override
-    public String toString() {
+    public String chaintoString() {
         StringBuilder string = new StringBuilder();
         Node cur = first;
         while (cur.next != null) {
-            string.append(cur.block.toString());
+            string.append(cur.block.toString()).append("\n");
             cur = cur.next;
         }
         return string.toString();

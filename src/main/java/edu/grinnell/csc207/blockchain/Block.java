@@ -83,8 +83,7 @@ public class Block {
      * a string representation of everything
      * @return returns string
      */
-    @Override
-    public String toString() {
+    public String blocktoString() {
         return "Block " + getNum() + " (Amount: " + getAmount() 
                 + ", Nonce: " + getNonce() + ", prevHash: " + getHash()
                 + ", hash: " + getHash() + ")";

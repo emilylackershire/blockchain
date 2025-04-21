@@ -45,6 +45,7 @@ public class BlockChainDriver {
         boolean quit = false;
         while (quit == false) {
             switch (input) {
+
                 case "mine":
                     System.out.println("Amount Transfered? ");
                     int amount = Integer.valueOf(scan.nextLine());
@@ -59,8 +60,7 @@ public class BlockChainDriver {
                     long nonceAppend = block.getNonce();
                     Block newBlock = new Block(block.getSize()
                             + 1, amountAppend, block.getHash(), nonceAppend);
-
-                    block.append(newBlock);
+                    block.append(newBlock, amountAppend);
 
                     System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
@@ -88,10 +88,9 @@ public class BlockChainDriver {
                 default:
                     printer();
             }
-            System.out.println("Command? ");
+            System.out.println("\nCommand?\n");
             input = scan.nextLine();
         }
-
         scan.close();
     }
 }

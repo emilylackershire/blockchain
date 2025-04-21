@@ -52,7 +52,6 @@ public class Hash {
      * 
      * @return
      */
-    @Override
     public String toString() {
         String hashString = "";
         for (int i = 0; i < data.length; i++) {
