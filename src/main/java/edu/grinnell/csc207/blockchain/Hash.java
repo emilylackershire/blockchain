@@ -89,6 +89,7 @@ public class Hash {
             throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("sha-256");
         md.update(ByteBuffer.allocate(4).putInt(amount).array());
+        md.update(ByteBuffer.allocate(4).putInt(num).array());
         if (prevHash != null) {
             md.update(prevHash.data);
         }

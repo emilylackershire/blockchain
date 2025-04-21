@@ -38,7 +38,7 @@ public class BlockChain {
      * @param initial initial balance we want to add
      */
     public BlockChain(int initial) {
-        Block block = new Block(1, initial, null);
+        Block block = new Block(1, initial, null, 0);
         Node n = new Node(block, null);
         first = n;
         last = n;
@@ -56,18 +56,19 @@ public class BlockChain {
         long nonce = 0;
         Hash hash = new Hash(Hash.calculateHash(this.getSize()
                 + 1, amount, last.block.getPrevHash(), nonce));
-        int maxIterations = 10000;
+        int maxIterations = 1000000000;
         int iterations = 0;
-        while (hash.isNotValid() && iterations > maxIterations) {
+        // before there was a line comparing maxIterations to iterations, to ensure the program would not run forever
+        while (hash.isNotValid()) {
             nonce++;
             hash = new Hash(Hash.calculateHash(this.getSize()
                     + 1, amount, last.block.getPrevHash(), nonce));
             iterations++;
         }
-        System.out.println("nonce " + nonce);
-        System.out.println("iterations " + iterations);
-        System.out.println("hash " + hash);
+        System.out.println("amount: " + amount + " nonce " + nonce);
+        //System.out.println("hash " + hash);
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
+        newBlock.nonce = nonce; 
         return newBlock;
     }
 
@@ -118,6 +119,7 @@ public class BlockChain {
      * @return returns hash
      */
     public Hash getHash() {
+
         return last.block.getHash();
     }
 

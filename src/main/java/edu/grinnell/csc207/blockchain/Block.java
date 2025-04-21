@@ -15,12 +15,14 @@ public class Block {
      * @param num - number 
      * @param amount - amount we are adding/taking
      * @param prevHash - previous hash
-     */
+    
     public Block(int num, int amount, Hash prevHash) {
         this.number = num;
         this.amount = amount;
         this.prevHash = prevHash;
+        this.nonce = 999;
     }
+    */
 
     /**
      * initializes everything
@@ -55,7 +57,7 @@ public class Block {
      * @return returns nonce
      */
     public long getNonce() {
-        return nonce;
+        return this.nonce;
     }
 
     /**
