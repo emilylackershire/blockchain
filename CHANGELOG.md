@@ -9,9 +9,6 @@ To start off, I fixed the style errors! (I couldn't get checkstyle to run previo
 
 I then changed my append method so it was working better. 
 
-if (blk.getHash().isValid() && blk.getHash() != blk.getPrevHash()) {
-            Node newNode = new Node(blk, null);
-            last.next = newNode;
-        } else {
-            throw new IllegalArgumentException();
-        }
+I started by realizing I wasn't even using the .append methd even though I wrote that, I was instead trying to manually do it which makes no sense.
+
+I then realized I wasn't mining the nonce correctly, and it was just giving back 0 each time which wasn't what I wanted. This was due to an issue with my while loop in mine. 
