@@ -36,6 +36,9 @@ public class BlockChainDriver {
             System.err.println("Error: cannot be negative");
         }
         BlockChain block = new BlockChain(initialAmount);
+        block.mine(initialAmount);
+        long initialNonce = block.getNonce();
+        System.out.println("amount: " + initialAmount + " nonce: " + initialNonce);
         printer();
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();

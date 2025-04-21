@@ -36,8 +36,9 @@ public class BlockChain {
      * creates the block chain
      * 
      * @param initial initial balance we want to add
+     * @throws NoSuchAlgorithmException 
      */
-    public BlockChain(int initial) {
+    public BlockChain(int initial) throws NoSuchAlgorithmException {
         Block block = new Block(1, initial, null, 0);
         Node n = new Node(block, null);
         first = n;
@@ -87,11 +88,14 @@ public class BlockChain {
      * @param blk block we are adding
      */
     public void append(Block blk) {
-        if (blk.getHash().isValid() && blk.getHash() != blk.getPrevHash()) {
+        Hash hash = blk.getHash();
+        Hash prevHash = blk.getPrevHash();
+        if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
             last.next = newNode;
         } else {
-            throw new IllegalArgumentException();
+            System.out.println("blk.getHash() " + hash + " blk.getPrevHash() " + prevHash);
+            //throw new IllegalArgumentException();
         }
     }
 
@@ -119,7 +123,6 @@ public class BlockChain {
      * @return returns hash
      */
     public Hash getHash() {
-
         return last.block.getHash();
     }
 

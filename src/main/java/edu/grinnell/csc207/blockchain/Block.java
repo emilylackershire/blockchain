@@ -1,5 +1,7 @@
 package edu.grinnell.csc207.blockchain;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  * A single block of a blockchain.
  */
@@ -30,12 +32,14 @@ public class Block {
      * @param amount - amount we are adding/taking
      * @param prevHash - previous hash
      * @param nonce - nonce
+     * @throws NoSuchAlgorithmException 
      */
-    public Block(int num, int amount, Hash prevHash, long nonce) {
+    public Block(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
         this.number = num;
         this.amount = amount;
         this.prevHash = prevHash;
         this.nonce = nonce;
+        this.hash = new Hash(Hash.calculateHash(amount, num, prevHash, nonce));
     }
 
     /**
@@ -72,7 +76,7 @@ public class Block {
      * @return returns hash
      */
     public Hash getHash() {
-        return hash;
+        return this.hash;
     }
 
     /**

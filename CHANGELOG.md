@@ -12,3 +12,5 @@ I then changed my append method so it was working better.
 I started by realizing I wasn't even using the .append methd even though I wrote that, I was instead trying to manually do it which makes no sense.
 
 I then realized I wasn't mining the nonce correctly, and it was just giving back 0 each time which wasn't what I wanted. This was due to an issue with my while loop in mine. 
+
+I was then getting an error in my in append because getHash was returning null, and I realized this was because it wasn't actually being initialized in my block class. 
