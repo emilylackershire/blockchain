@@ -50,7 +50,7 @@ public class Hash {
     /**
      * returns a sting representation of the hash
      * 
-     * @return
+     * @return string representation
      */
     public String toString() {
         String hashString = "";

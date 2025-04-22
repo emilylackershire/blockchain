@@ -14,25 +14,12 @@ public class Block {
 
     /**
      * initializes everything
-     * @param num - number 
-     * @param amount - amount we are adding/taking
+     * 
+     * @param num      - number
+     * @param amount   - amount we are adding/taking
      * @param prevHash - previous hash
-    
-    public Block(int num, int amount, Hash prevHash) {
-        this.number = num;
-        this.amount = amount;
-        this.prevHash = prevHash;
-        this.nonce = 999;
-    }
-    */
-
-    /**
-     * initializes everything
-     * @param num - number 
-     * @param amount - amount we are adding/taking
-     * @param prevHash - previous hash
-     * @param nonce - nonce
-     * @throws NoSuchAlgorithmException 
+     * @param nonce    - nonce
+     * @throws NoSuchAlgorithmException
      */
     public Block(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
         this.number = num;
@@ -50,14 +37,15 @@ public class Block {
     }
 
     /**
-     * @return retruns the amount 
+     * @return retruns the amount
      */
     public int getAmount() {
         return amount;
     }
 
-    /** 
+    /**
      * returns the nonce
+     * 
      * @return returns nonce
      */
     public long getNonce() {
@@ -73,6 +61,7 @@ public class Block {
 
     /**
      * returns the hash
+     * 
      * @return returns hash
      */
     public Hash getHash() {
@@ -81,10 +70,11 @@ public class Block {
 
     /**
      * a string representation of everything
+     * 
      * @return returns string
      */
     public String blocktoString() {
-        return "Block " + getNum() + " (Amount: " + getAmount() 
+        return "Block " + getNum() + " (Amount: " + getAmount()
                 + ", Nonce: " + getNonce() + ", prevHash: " + getHash()
                 + ", hash: " + getHash() + ")";
     }

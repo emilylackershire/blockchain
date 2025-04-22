@@ -37,7 +37,7 @@ public class BlockChain {
      * creates the block chain
      * 
      * @param initial initial balance we want to add
-     * @throws NoSuchAlgorithmException 
+     * @throws NoSuchAlgorithmException
      */
     public BlockChain(int initial) throws NoSuchAlgorithmException {
         Block block = new Block(1, initial, null, 0);
@@ -64,9 +64,9 @@ public class BlockChain {
                     + 1, amount, last.block.getPrevHash(), nonce));
         }
         System.out.println("amount: " + amount + " nonce " + nonce);
-        //System.out.println("hash " + hash);
+        // System.out.println("hash " + hash);
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
-        newBlock.nonce = nonce; 
+        newBlock.nonce = nonce;
         return newBlock;
     }
 
@@ -82,7 +82,8 @@ public class BlockChain {
     /**
      * appends a new block to the block chain
      * 
-     * @param blk block we are adding
+     * @param blk    block we are adding
+     * @param amount amount we are adding
      */
     public void append(Block blk, int amount) throws NoSuchAlgorithmException {
         nonce = 0;
@@ -94,12 +95,12 @@ public class BlockChain {
                     + 1, amount, last.block.getPrevHash(), nonce));
         }
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
-        newBlock.nonce = nonce; 
+        newBlock.nonce = nonce;
         Hash prevHash = blk.getPrevHash();
         if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
             last.next = newNode;
-            if(amount > 0){
+            if (amount > 0) {
                 annaBalance += amount;
             } else {
                 bobBalance += amount;
@@ -107,7 +108,8 @@ public class BlockChain {
         } else {
             throw new IllegalArgumentException();
         }
-        System.out.println("\nnonce: " + nonce + "\nhash: " + hash + "\nprevious hash: " + prevHash);
+        System.out.println("\nnonce: " + nonce + "\nhash: " + hash
+                + "\nprevious hash: " + prevHash);
     }
 
     /**
@@ -125,11 +127,10 @@ public class BlockChain {
                     + 1, amount, last.block.getPrevHash(), nonce));
         }
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
-        newBlock.nonce = nonce; 
+        newBlock.nonce = nonce;
         System.out.println("\ninitial block - nonce: " + nonce + "\nhash: " + hash + "\n");
     }
 
-    
     /**
      * removes the last element of the blockchain
      * 
@@ -220,7 +221,7 @@ public class BlockChain {
     /**
      * string representation of the block
      * 
-     * @returns
+     * @return returns chain to string representation
      */
     public String chaintoString() {
         StringBuilder string = new StringBuilder();

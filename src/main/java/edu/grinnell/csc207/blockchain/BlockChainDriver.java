@@ -26,12 +26,12 @@ public class BlockChainDriver {
      * @throws NoSuchAlgorithmException
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        //if (args.length != 1) {
-        //    System.err.println("Usage: java BlockChain: missing an initial amount");
-        //    System.exit(1);
-        //}
+        // if (args.length != 1) {
+        // System.err.println("Usage: java BlockChain: missing an initial amount");
+        // System.exit(1);
+        // }
         int initialAmount = 300;
-        //Integer.valueOf(args[0]);
+        // Integer.valueOf(args[0]);
         if (initialAmount < 0) {
             System.err.println("Error: cannot be negative");
         }
@@ -49,15 +49,15 @@ public class BlockChainDriver {
                     int amount = Integer.valueOf(scan.nextLine());
                     block.mine(amount);
                     long nonce = block.getNonce();
-                    //System.out.println("amount: " + amount + " nonce: " + block.getNonce());
+                    // System.out.println("amount: " + amount + " nonce: " + block.getNonce());
                     break;
                 case "append":
                     System.out.println("Amount Transfered? ");
                     int amountAppend = Integer.valueOf(scan.nextLine());
                     Block newBlock = new Block(block.getSize()
-                            + 1, amountAppend, block.getHash(), 0); //I calculate nonce in append
+                            + 1, amountAppend, block.getHash(), 0); // I calculate nonce in append
                     block.append(newBlock, amountAppend);
-                    //System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
+                    // System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
                 case "remove":
                     block.removeLast();

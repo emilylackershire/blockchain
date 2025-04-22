@@ -19,8 +19,15 @@ public class Tests {
         assertEquals(0, block.bobBalance);
     }
     @Test
-    public void annaStratTest() throws NoSuchAlgorithmException {
+    public void testAppendBlock() throws NoSuchAlgorithmException {
         BlockChain block = new BlockChain(initialAmount);
-        assertEquals(300, block.annaBalance);
+        Block newAnnaBlock = new Block(block.getSize()
+        + 1, 400, block.getHash(), 0);
+        block.append(newAnnaBlock, 0);
+        Block newBobBlock = new Block(block.getSize()
+        + 1, 0, block.getHash(), 0);
+        block.append(newBobBlock, -100);
+        assertEquals(400, block.annaBalance);
+        assertEquals(100, block.bobBalance);
     }
 }
