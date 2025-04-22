@@ -43,7 +43,6 @@ public class BlockChainDriver {
         boolean quit = false;
         while (quit == false) {
             switch (input) {
-
                 case "mine":
                     System.out.println("Amount Transfered? ");
                     int amount = Integer.valueOf(scan.nextLine());
@@ -83,6 +82,7 @@ public class BlockChainDriver {
                 default:
                     printer();
             }
+            System.out.println(block.toString());
             System.out.println("\nCommand?\n");
             input = scan.nextLine();
         }

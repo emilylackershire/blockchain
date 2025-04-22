@@ -53,11 +53,11 @@ public class Hash {
      * @return string representation
      */
     public String toString() {
-        String hashString = "";
-        for (int i = 0; i < data.length; i++) {
-            hashString += Byte.toUnsignedInt(data[i]);
+        StringBuilder hashString = new StringBuilder();
+        for (int i = 0; i < this.data.length; i++) {
+            hashString.append(String.format("%02x", data[i]));
         }
-        return hashString;
+        return hashString.toString(); 
     }
 
     /**

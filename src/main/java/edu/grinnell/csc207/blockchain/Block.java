@@ -29,18 +29,27 @@ public class Block {
         this.hash = new Hash(Hash.calculateHash(amount, num, prevHash, nonce));
     }
 
+    public long mineNonce(int amount) throws NoSuchAlgorithmException {
+        nonce = 0;
+        Hash hash = new Hash(Hash.calculateHash(this.getNum(), amount, this.getPrevHash(), nonce));
+        while (hash.isNotValid()) {
+            nonce++;
+            hash = new Hash(Hash.calculateHash(this.getNum(), amount, this.getPrevHash(), nonce));
+        }
+        return nonce;
+    }
     /**
      * @return returns number
      */
     public int getNum() {
-        return number;
+        return this.number;
     }
 
     /**
      * @return retruns the amount
      */
     public int getAmount() {
-        return amount;
+        return this.amount;
     }
 
     /**
@@ -56,7 +65,7 @@ public class Block {
      * @return returns the previous hash
      */
     public Hash getPrevHash() {
-        return prevHash;
+        return this.prevHash;
     }
 
     /**
@@ -73,7 +82,8 @@ public class Block {
      * 
      * @return returns string
      */
-    public String blocktoString() {
+    @Override
+    public String toString() {
         return "Block " + getNum() + " (Amount: " + getAmount()
                 + ", Nonce: " + getNonce() + ", prevHash: " + getHash()
                 + ", hash: " + getHash() + ")";

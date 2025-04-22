@@ -11,6 +11,7 @@ public class BlockChain {
     Node first;
     Node last;
     long nonce = 0;
+    int size = 0;
     public int annaBalance = 0;
     public int bobBalance = 0;
 
@@ -76,7 +77,7 @@ public class BlockChain {
      * @return returns size
      */
     public int getSize() {
-        return last.block.getNum();
+        return this.size;
     }
 
     /**
@@ -99,11 +100,13 @@ public class BlockChain {
         Hash prevHash = blk.getPrevHash();
         if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
-            last.next = newNode;
+            this.last.next = newNode;
+            this.last = this.last.next;
+            this.size++;
             if (amount > 0) {
                 annaBalance += amount;
             } else {
-                bobBalance += amount;
+                bobBalance += Math.abs(amount);
             }
         } else {
             throw new IllegalArgumentException();
@@ -128,6 +131,7 @@ public class BlockChain {
         }
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
         newBlock.nonce = nonce;
+        this.size++;
         System.out.println("\ninitial block - nonce: " + nonce + "\nhash: " + hash + "\n");
     }
 
@@ -144,6 +148,8 @@ public class BlockChain {
             while (cur.next != null) {
                 cur = cur.next;
             }
+            cur.next = null;
+            size--;
             last = cur;
             return true;
         }
@@ -212,7 +218,7 @@ public class BlockChain {
             if (cur.block.getAmount() > 0) {
                 annaBalance += cur.block.getAmount();
             } else {
-                bobBalance += cur.block.getAmount();
+                bobBalance += Math.abs(cur.block.getAmount());
             }
             cur = cur.next;
         }
@@ -223,14 +229,15 @@ public class BlockChain {
      * 
      * @return returns chain to string representation
      */
-    public String chaintoString() {
-        StringBuilder string = new StringBuilder();
-        Node cur = first;
-        while (cur.next != null) {
-            string.append(cur.block.toString()).append("\n");
+    @Override
+    public String toString() {
+        Node cur = this.first;
+        String string = "";
+        while (cur != null) {
+            string = string  + "\n" + cur.block.toString();
             cur = cur.next;
         }
-        return string.toString();
+        return string;
     }
-
 }
+
