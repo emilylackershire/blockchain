@@ -13,4 +13,6 @@ I started by realizing I wasn't even using the .append methd even though I wrote
 
 I then realized I wasn't mining the nonce correctly, and it was just giving back 0 each time which wasn't what I wanted. This was due to an issue with my while loop in mine. 
 
-I was then getting an error in my in append because getHash was returning null, and I realized this was because it wasn't actually being initialized in my block class. 
+I was then getting an error in my in append because getHash was returning null, and I realized this was because it wasn't actually being initialized in my block class. I initialized it, and made sure it was getting the nonce in append. I also made sure the balances were actually being updated, so now that works!
+
+

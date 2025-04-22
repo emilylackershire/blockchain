@@ -111,9 +111,9 @@ public class BlockChain {
     }
 
     /**
-     * appends a new block to the block chain
+     * gets the inital block, mining for the nonce and hash
      * 
-     * @param blk block we are adding
+     * @param amount amount we are adding
      */
     public void initialBlock(int amount) throws NoSuchAlgorithmException {
         nonce = 0;
