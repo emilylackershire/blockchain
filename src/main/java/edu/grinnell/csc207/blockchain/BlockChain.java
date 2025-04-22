@@ -99,12 +99,37 @@ public class BlockChain {
         if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
             last.next = newNode;
+            if(amount > 0){
+                annaBalance += amount;
+            } else {
+                bobBalance += amount;
+            }
         } else {
-            System.out.println("nonce: " + blk.getNonce() + " blk.getHash() " + hash + " blk.getPrevHash() " + prevHash);
-            //throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
+        System.out.println("\nnonce: " + nonce + "\nhash: " + hash + "\nprevious hash: " + prevHash);
     }
 
+    /**
+     * appends a new block to the block chain
+     * 
+     * @param blk block we are adding
+     */
+    public void initialBlock(int amount) throws NoSuchAlgorithmException {
+        nonce = 0;
+        Hash hash = new Hash(Hash.calculateHash(this.getSize()
+                + 1, amount, last.block.getPrevHash(), nonce));
+        while (hash.isNotValid()) {
+            nonce++;
+            hash = new Hash(Hash.calculateHash(this.getSize()
+                    + 1, amount, last.block.getPrevHash(), nonce));
+        }
+        Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
+        newBlock.nonce = nonce; 
+        System.out.println("\ninitial block - nonce: " + nonce + "\nhash: " + hash + "\n");
+    }
+
+    
     /**
      * removes the last element of the blockchain
      * 

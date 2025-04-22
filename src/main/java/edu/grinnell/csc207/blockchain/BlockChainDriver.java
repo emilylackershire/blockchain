@@ -16,7 +16,7 @@ public class BlockChainDriver {
         System.out.println(" report: reports the balances of Alice and Bob ");
         System.out.println(" help: prints this list of commands ");
         System.out.println(" quit: quits the program");
-        System.out.println("Command?");
+        System.out.println("\nCommand?");
     }
 
     /**
@@ -36,9 +36,7 @@ public class BlockChainDriver {
             System.err.println("Error: cannot be negative");
         }
         BlockChain block = new BlockChain(initialAmount);
-        block.mine(initialAmount);
-        long initialNonce = block.getNonce();
-        System.out.println("amount: " + initialAmount + " nonce: " + initialNonce);
+        block.initialBlock(initialAmount);
         printer();
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
@@ -56,13 +54,10 @@ public class BlockChainDriver {
                 case "append":
                     System.out.println("Amount Transfered? ");
                     int amountAppend = Integer.valueOf(scan.nextLine());
-                    block.mine(amountAppend);
-                    long nonceAppend = block.getNonce();
                     Block newBlock = new Block(block.getSize()
-                            + 1, amountAppend, block.getHash(), nonceAppend);
+                            + 1, amountAppend, block.getHash(), 0); //I calculate nonce in append
                     block.append(newBlock, amountAppend);
-
-                    System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
+                    //System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
                 case "remove":
                     block.removeLast();
