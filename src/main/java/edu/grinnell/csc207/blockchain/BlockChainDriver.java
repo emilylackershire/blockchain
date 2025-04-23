@@ -48,7 +48,6 @@ public class BlockChainDriver {
                     int amount = Integer.valueOf(scan.nextLine());
                     block.mine(amount);
                     long nonce = block.getNonce();
-                    // System.out.println("amount: " + amount + " nonce: " + block.getNonce());
                     break;
                 case "append":
                     System.out.println("Amount Transfered? ");
@@ -56,7 +55,6 @@ public class BlockChainDriver {
                     Block newBlock = new Block(block.getSize()
                             + 1, amountAppend, block.getHash(), 0); // I calculate nonce in append
                     block.append(newBlock, amountAppend);
-                    // System.out.println("amount: " + amountAppend + " nonce: " + nonceAppend);
                     break;
                 case "remove":
                     block.removeLast();
