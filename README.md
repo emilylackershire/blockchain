@@ -11,8 +11,81 @@ Authors: Emily Lackershire
 + git & github
 + I wasn't sure how scanner worked, so I read the oracle docs on Scanner:
   https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html
++ had general discussions about the project with finn rowles, owen block and colton benson
 
 ## git log 
+commit b1c9c45c10faf370daacc885b19f611e29b21a08 (HEAD -> main, origin/main, origin/HEAD)
+Author: Emily <lackersh@grinnell.edu>
+Date:   Wed Apr 23 10:06:33 2025 -0500
+
+    Update BlockChainDriver.java
+
+commit 5ecad9986c6f517f7899ad85f8ffb0ed0e9653aa
+Author: Emily <lackersh@grinnell.edu>
+Date:   Tue Apr 22 15:34:29 2025 -0500
+
+    got the blocks to print out each time! changed the tostring functions
+
+commit 3900ae0d1418aaafe5d6be69640405a3a5007c00
+Author: Emily <lackersh@grinnell.edu>
+Date:   Tue Apr 22 14:27:41 2025 -0500
+
+    style changes and tests
+
+commit 0f20d4f9d1096a956a8a3edcfd595e64c13304a5
+Author: Emily <lackersh@grinnell.edu>
+Date:   Mon Apr 21 20:31:31 2025 -0500
+
+    changelog and javadoc
+
+commit 3022f798fa7a3677a8560c505815fba4929a4a6e
+Author: Emily <lackersh@grinnell.edu>
+Date:   Mon Apr 21 20:29:09 2025 -0500
+
+    fixed append method so it works and acctually updates the balances as well!
+
+commit 5bcc78d0e1f7e4830e7ad7be9b41a39ba62b2a67
+Author: Emily <lackersh@grinnell.edu>
+Date:   Mon Apr 21 14:01:26 2025 -0500
+
+    worked on append
+
+commit d5d2b3342b27934aa7f18bc2cd405431cb5f7743
+Author: Emily <lackersh@grinnell.edu>
+Date:   Mon Apr 21 10:18:53 2025 -0500
+
+    tried to fix errors in append, right now mining is giving a calid nonce but its not being stored correctly so when you try to use get nonce it returns 0
+
+commit 70748456a743a705bf43dbbad60d06d5d32062e7
+Author: Emily <lackersh@grinnell.edu>
+Date:   Sun Apr 20 23:51:27 2025 -0500
+
+    updated readme
+
+commit d80e38fe9db2e8509228ad366491eec291c014b5
+Author: Emily <lackersh@grinnell.edu>
+Date:   Sun Apr 20 23:48:41 2025 -0500
+
+    fixed mainly the mine function so that it was acctually mining the nonce instead of just returning 0
+
+commit 74b02663e716fd56b92c49ea9b73ddf246e4f658
+Author: Emily <lackersh@grinnell.edu>
+Date:   Sat Apr 19 18:08:34 2025 -0500
+
+    I don't think I really even changed much, I just tried things and went back to what it was i'm trying to figure out what I was doing last time
+
+commit 4a8ba597e53eea981d4547857ba29ab8939d29d0
+Author: Emily <lackersh@grinnell.edu>
+Date:   Sat Apr 19 17:14:08 2025 -0500
+
+    I accidentially put blockchain in clock :/ it cased a ton of errors but i've fixed it now!
+
+commit 7e36131b508c3ece05d8b7aeed3a2deae8db56fa
+Author: Emily <lackersh@grinnell.edu>
+Date:   Wed Apr 16 21:20:25 2025 -0500
+
+    fixed style!
+
 commit abea123e814ded16dec089d08f5158a70ffe400b (HEAD -> main, origin/main, origin/HEAD)
 Author: Emily <lackersh@grinnell.edu>
 Date:   Tue Mar 11 21:31:50 2025 -0400

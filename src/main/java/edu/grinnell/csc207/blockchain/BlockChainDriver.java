@@ -79,8 +79,7 @@ public class BlockChainDriver {
                     break;
                 default:
                     printer();
-            }
-            System.out.println(block.toString());
+                }
             System.out.println("\nCommand?\n");
             input = scan.nextLine();
         }
