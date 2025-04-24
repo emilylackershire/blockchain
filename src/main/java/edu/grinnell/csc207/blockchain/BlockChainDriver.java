@@ -26,12 +26,11 @@ public class BlockChainDriver {
      * @throws NoSuchAlgorithmException
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        // if (args.length != 1) {
-        // System.err.println("Usage: java BlockChain: missing an initial amount");
-        // System.exit(1);
-        // }
-        int initialAmount = 300;
-        // Integer.valueOf(args[0]);
+        //if (args.length != 1) {
+        //System.err.println("Usage: java BlockChain: missing an initial amount");
+        //System.exit(1);
+        //}
+        int initialAmount = Integer.valueOf(args[0]);
         if (initialAmount < 0) {
             System.err.println("Error: cannot be negative");
         }
@@ -79,7 +78,7 @@ public class BlockChainDriver {
                     break;
                 default:
                     printer();
-                }
+            }
             System.out.println("\nCommand?\n");
             input = scan.nextLine();
         }

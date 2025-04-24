@@ -110,7 +110,10 @@ public class BlockChain {
         } else {
             throw new IllegalArgumentException();
         }
-        System.out.println("\nnonce: " + nonce + "\nhash: " + hash
+        System.out.println("\nblock: " + (getSize() - 1)
+                + "\namount: " + amount
+                + "\nnonce: " + nonce
+                + "\nhash: " + hash
                 + "\nprevious hash: " + prevHash);
     }
 
@@ -131,7 +134,10 @@ public class BlockChain {
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
         newBlock.nonce = nonce;
         this.size++;
-        System.out.println("\ninitial block - nonce: " + nonce + "\nhash: " + hash + "\n");
+        System.out.println("\nblock: " + (getSize() - 1)
+                + "\namount: " + amount
+                + "\nnonce: " + nonce
+                + "\nhash: " + hash + "\n");
     }
 
     /**
@@ -233,10 +239,9 @@ public class BlockChain {
         Node cur = this.first;
         String string = "";
         while (cur != null) {
-            string = string  + "\n" + cur.block.toString();
+            string = string + "\n" + cur.block.toString();
             cur = cur.next;
         }
         return string;
     }
 }
-

@@ -29,15 +29,6 @@ public class Block {
         this.hash = new Hash(Hash.calculateHash(amount, num, prevHash, nonce));
     }
 
-    public long mineNonce(int amount) throws NoSuchAlgorithmException {
-        nonce = 0;
-        Hash hash = new Hash(Hash.calculateHash(this.getNum(), amount, this.getPrevHash(), nonce));
-        while (hash.isNotValid()) {
-            nonce++;
-            hash = new Hash(Hash.calculateHash(this.getNum(), amount, this.getPrevHash(), nonce));
-        }
-        return nonce;
-    }
     /**
      * @return returns number
      */
