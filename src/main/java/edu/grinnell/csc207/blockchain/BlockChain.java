@@ -96,7 +96,6 @@ public class BlockChain {
                     + 1, amount, last.block.getPrevHash(), nonce));
         }
         Block newBlock = new Block(this.getSize() + 1, amount, hash, nonce);
-        newBlock.nonce = nonce;
         Hash prevHash = blk.getPrevHash();
         if (hash.isValid() && hash != prevHash) {
             Node newNode = new Node(blk, null);
