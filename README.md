@@ -14,6 +14,18 @@ Authors: Emily Lackershire
 + had general discussions about the project with finn rowles, owen block and colton benson
 
 ## git log 
+commit 7de14a2b52f1c378c36c325694f7bff991b4bd4a (HEAD -> main, origin/main, origin/HEAD)
+Author: Emily <lackersh@grinnell.edu>
+Date:   Wed Apr 23 20:23:34 2025 -0500
+
+    updates
+
+commit a1bc2073a380e290b98de1f5f541bcb8298cfcf7
+Author: Emily <lackersh@grinnell.edu>
+Date:   Wed Apr 23 20:23:25 2025 -0500
+
+    updated readme
+
 commit b1c9c45c10faf370daacc885b19f611e29b21a08 (HEAD -> main, origin/main, origin/HEAD)
 Author: Emily <lackersh@grinnell.edu>
 Date:   Wed Apr 23 10:06:33 2025 -0500
